@@ -6,7 +6,10 @@ IMAGES = [f'static/George/{f}' for f in os.listdir('static/George')]
 app = Flask(__name__)
 
 def images_html(i):
-    img = IMAGES[i]
+    try:
+        img = IMAGES[i]
+    except:
+        img = ""
     if '.mp4' in img:
         style = ""
         vidstyle = f""" style='transform:rotate(270deg)'"""
@@ -16,7 +19,7 @@ def images_html(i):
         </video>
         """
     else:
-        style = f""" style="background-image: url('{IMAGES[i]}');background-size:100%" """
+        style = f""" style="background-image: url('{img}');background-size:100%" """
         vid = ""
     out = f"""
     <!doctype html>
@@ -28,6 +31,7 @@ def images_html(i):
 
     </head>
     <body>
+    <script src='static/page_request.js'></script>
     <div{style}>{vid}</div>
 
     </body>

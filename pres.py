@@ -54,9 +54,13 @@ def page(arg):
 def ping():
     return jsonify(pong=time.time())
 
+@app.route('/fractals')
+def fractal():
+    return render_template('fractals.html')
+
 
 def main():
-    app.run(host='0.0.0.0', port=8000, processes=1)
+    app.run(host='0.0.0.0', port=8080, processes=1)
 
 if __name__ == "__main__":
     # def main(i):
